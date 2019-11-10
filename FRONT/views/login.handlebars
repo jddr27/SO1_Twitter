@@ -1,0 +1,75 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>Login</title>
+    <!-- GLOBAL MAINLY STYLES-->
+    <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="vendors/line-awesome/css/line-awesome.min.css" rel="stylesheet" />
+    <link href="vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
+    <link href="vendors/animate.css/animate.min.css" rel="stylesheet" />
+    <!-- PLUGINS STYLES-->
+    <!-- THEME STYLES-->
+    <link href="css/main.min.css" rel="stylesheet" />
+    <!-- PAGE LEVEL STYLES-->
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- START HEADER-->
+        <header class="header">
+            <a href="/register">Registrar</a>
+        </header>
+        <!-- END HEADER-->
+        <div class="content-wrapper">
+            <!-- START PAGE CONTENT-->
+            <div class="page-content fade-in-up">
+                <h1>{{mensaje}}</h1>
+                <div class="page-content fade-in-up">
+
+                    <div class="ibox">
+                        <div class="ibox-body">
+                            <div class="mb-4">
+                              <form action="entrar">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">User name</label>
+                                    <input type="text" class="form-control" id="usr" aria-describedby="emailHelp" name="usr" placeholder="Usuario">
+                                    <small id="emailHelp" class="form-text text-muted">El usuario @  </small>
+                                </div>
+                               <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"  name="pass" placeholder="Password"> 
+                                </div>
+                                <button type="submit" class="btn btn-primary">Login</button>
+                                </form>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- END PAGE CONTENT-->
+            <footer class="page-footer">
+                
+
+                <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- CORE PLUGINS-->
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendors/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="vendors/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+    <!-- PAGE LEVEL PLUGINS-->
+    <script src="vendors/chart.js/dist/Chart.min.js"></script>
+    <script src="vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+    <!-- CORE SCRIPTS-->
+    <script src="js/app.min.js"></script>
+    <!-- PAGE LEVEL SCRIPTS-->
+    <script src="js/scripts/dashboard_visitors.js"></script>
+</body>
