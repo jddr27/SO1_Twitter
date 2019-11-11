@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width initial-scale=1.0">
-    <title>Practica2</title>
+    <title>Sistemas Operativos 1</title>
     <!-- GLOBAL MAINLY STYLES-->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -19,10 +19,48 @@
     <div class="page-wrapper">
         <!-- START HEADER-->
         <header class="header">
-            <a href="/logout">Log Out</a>}
+            <!-- START TOP-LEFT TOOLBAR-->
+            <ul class="nav navbar-toolbar">
+                <li>
+                    <a class="nav-link sidebar-toggler js-sidebar-toggler" href="javascript:;">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                </li>
+            </ul>
+            <!-- END TOP-LEFT TOOLBAR-->
+            <!--LOGO-->
+            <a class="page-brand" href="index.html">SO</a>
+            <!-- START TOP-RIGHT TOOLBAR-->
+            <ul class="nav navbar-toolbar">
+                <li class="dropdown dropdown-user">
+                    <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
+                        <span>Admin</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- END TOP-RIGHT TOOLBAR-->
         </header>
         <!-- END HEADER-->
-        
+        <!-- START SIDEBAR-->
+        <nav class="page-sidebar">
+            <ul class="side-menu metismenu scroller">
+                <li class="active">
+                    <a href="javascript:;"><i class="sidebar-item-icon ti-home"></i>
+                        <span class="nav-label">Dashboards</span><i class="fa fa-angle-left arrow"></i></a>
+                    <ul class="nav-2-level collapse in">
+                        <li>
+                            <a class="active" href="/tweets">tweets</a>
+                        </li>
+                        <li>
+                            <a href="/">Tweetear</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- END SIDEBAR-->
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div class="page-content fade-in-up">
@@ -30,53 +68,36 @@
                 <div class="page-content fade-in-up">
                     <div class="flexbox-b mb-5">
                         <span class="mr-4 static-badge badge-pink"></span>
-                        <form action="ingresar">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="usr" aria-describedby="emailHelp" name="usr" value="{{usu}}" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Tweet</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" name="txt" placeholder="Tweet">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-
-                    <div class="input-group-icon input-group-icon-left input-group-lg mb-4">
-                        <span class="input-icon input-icon-right"><i class="ti-search"></i></span>
-                        <input id="search" class="form-control form-control-air font-light font-poppins border-0" type="text" placeholder="Buscar tweet ..." style="box-shadow:0 3px 6px rgba(10,16,20,.15);">
+                        <div>
+                            <h5 class="font-strong">Twitear</h5>
+                            <div class="text-light">Analisis</div>
+                        </div>
                     </div>
 
                     <div class="ibox">
                         <div class="ibox-body">
                             <div class="mb-4">
-                                <h3 class="mt-1">{{total}} resultados para:
-                                    <span class="text-primary">“{{q}}”</span>
-                                </h3></div>
-                            <ul class="list-group list-group-full list-group-divider">
-                                {{#each tweets}}
-                                <li class="list-group-item py-3">
-                                    <a class="media-img" href="javascript:;">
-                                        <img class="img-circle" src="img/users/u10.jpg" alt="image" width="54">
-                                        {{this.alias_usuario}}
-                                    </a>
-                                    
-                                    <p class="text-light">{{this.txt}}</p>
-                                    <div class="text-muted font-13">
-                                        <span class="badge badge-primary">{{this.categoria}}</span>
-                                        <span class="mx-2">•</span>
-                                        <spam >{{this.nombre}}</spam>
-                                        <span>{{this.usr}}</span>
-                                    </div>
-                                </li>
-                                {{/each}}
-                            </ul>
+                              <form action="ingresar">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">User name</label>
+                                    <input type="text" class="form-control" id="usr" aria-describedby="emailHelp" name="usr" placeholder="Usuario">
+                                    <small id="emailHelp" class="form-text text-muted">El usuario @  </small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Nombre</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1"  name="nom" placeholder="Nombre">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Tweet</label>
+                                    <input type="text" class="form-control" id="exampleInputPassword1" name="txt" placeholder="Tweet">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>    
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-
-
             </div>
             <!-- END PAGE CONTENT-->
             <footer class="page-footer">

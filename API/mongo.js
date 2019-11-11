@@ -8,7 +8,6 @@ const url = `mongodb://admin:admin@${IP}:27017`;
 const DB_NAME = 'sopes1proyecto';
 
 const COLLECITON_NAME = 'tweets';
-const COLLECTION_NAME2 = 'usus';
  
 
 const MONGODB = {
@@ -30,23 +29,6 @@ const MONGODB = {
         });
     },
 
-    insert2: function(document) {
-        MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-            
-            if (err) throw err;
-            console.log("Connected successfully to server");
-        
-            const db = client.db(DB_NAME);
-            const collection = db.collection(COLLECTION_NAME2);
-            collection.insertOne(document, function(err, result) {
-
-                if (err) throw err;
-                console.log("usuario guardado en database;");
-                client.close();
-            });
-        });
-    },
-
     delete: function(callback) {
         MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
             
@@ -58,6 +40,29 @@ const MONGODB = {
             collection.remove({});
         });
     }
+
+
+
+/*
+    insert: function(db, callback) {
+        // Get the documents collection
+        const collection = db.collection('tweets');
+        // Insert some documents
+        collection.insertOne({
+            content:"this is a tweet #test"
+        }, function(err, result) {
+
+            if (err) {
+                console.error(err);
+                return;
+            }
+
+            console.log("tweet guardado en database;");
+            callback(result);
+            
+        });
+
+    }*/
 }
 
 

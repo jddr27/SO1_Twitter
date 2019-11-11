@@ -25,7 +25,6 @@ const url = `mongodb://admin:admin@${IP}:27017`;
 const DB_NAME = 'sopes1proyecto';
 
 const COLLECITON_NAME = 'tweets';
-const COLLECTION_NAME2 = 'usus';
 
 
 app.get('/', (req, res) => {
@@ -63,34 +62,6 @@ app.get('/tweets', (req, res) => {
 });
 
 
-app.get('/usus', (req, res) => {
-    MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-            
-        if (err) throw err;
-    
-        const db = client.db(DB_NAME);
-        const collection = db.collection(COLLECTION_NAME2);
-
-        let q = req.query.q;
-
-        let query = {};
-        if (q) {
-            q = q.replace('%23', '#');
-            query = {
-                alias_usuario: new RegExp(q)
-            }
-        }
-
-        collection.find(query).toArray(function(err, result){
-            res.json({
-                usu: result,
-                total: result.length
-            });
-        });
-        
-    });
-});
-
 
 app.get('/api/tweets', (req, res) => {
 
@@ -108,25 +79,6 @@ app.get('/api/tweets', (req, res) => {
     });
 
 });
-
-
-app.get('/api/usus', (req, res) => {
-
-    MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-            
-        if (err) throw err;
-        console.log("Connected successfully to server");
-    
-        const db = client.db(DB_NAME);
-        const collection = db.collection(COLLECTION_NAME2);
-        collection.find({}).toArray(function(err, result){
-            res.json(result);
-        });
-        
-    });
-
-});
-
 
 app.get('/api/tweet', (req, res) => {
 
@@ -183,34 +135,6 @@ app.get('/api/delete-tweets', (req, res) => {
 
         res.json({
             success: true
-        });
-    } catch(e) {
-        res.json({
-            success: false,
-            error: e
-        });
-    }
-
-});
-
-
-app.get('/api/usu', (req, res) => {
-
-    const usr = req.query.usr;
-    const pass = req.query.pass;
-
-    try {
-
-        const info = {
-            alias_usuario: usr,
-            password: pass
-        };
-
-        require('./mongo').insert2(info);
-
-        res.json({
-            success: true,
-            info: info
         });
     } catch(e) {
         res.json({
