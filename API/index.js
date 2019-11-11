@@ -182,6 +182,8 @@ var news = io
   .of('/news')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del news');
+
+    socket.emit('item', { news: 'item' });
   });
 
   server.listen(3001, function() {

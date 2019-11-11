@@ -28,6 +28,6 @@ function addMessage(e) {
 */
 var news = io.connect('http://130.211.112.112:3001/news');
   
-  news.on('connect', function () {
+  news.on('news', function () {
     /*chat.emit('hi!');*/
   });
