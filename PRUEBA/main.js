@@ -27,5 +27,5 @@ io.on('connection', function(socket) {
 });
 
 server.listen(3001, function() {
-  console.log("Servidor corriendo en http://localhost:3001");
+  console.log("Servidor corriendo en http://130.211.112.112:3001");
 });

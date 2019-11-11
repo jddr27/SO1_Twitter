@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:3001', { 'forceNew': true });
+var socket = io.connect('http://130.211.112.112:3001', { 'forceNew': true });
 
 socket.on('messages', function(data) {
   console.log(data);
