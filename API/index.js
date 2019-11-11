@@ -177,14 +177,14 @@ const chat = io
   .of('/chat')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del chat');
-    chat.emit('hi', { news: 'Hello from Chat' });
+    chat.emit('hi', 'Hello from Chat');
   });
 
 const news = io
   .of('/news')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del news');
-    news.emit('hi', { news: 'Hello from News' });
+    news.emit('hi', 'Hello from News');
   });
 
   server.listen(3001, function() {
