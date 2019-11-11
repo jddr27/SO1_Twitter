@@ -26,8 +26,4 @@ function addMessage(e) {
   return false;
 }
 */
-var news = io.connect('http://130.211.112.112:3001/news');
-  
-  news.on('news', function () {
-    /*chat.emit('hi!');*/
-  });
+var news = io.connect('http://130.211.112.112:3001/news', { 'forceNew': true });
