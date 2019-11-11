@@ -171,26 +171,18 @@ app.use(express.static(path.join(__dirname, 'public')));
   });*/
   
 
-var chat = io
+const chat = io
   .of('/chat')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del chat');
-    socket.emit('a message', {
-        that: 'only'
-      , '/chat': 'will get'
-    });
-    chat.emit('a message', {
-        everyone: 'in'
-      , '/chat': 'will get'
-    });
+    chat.emit('hi', { news: 'Hello from Chat' });
   });
 
-var news = io
+const news = io
   .of('/news')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del news');
-
-    socket.emit('item', { news: 'item' });
+    news.emit('hi', { news: 'Hello from News' });
   });
 
   server.listen(3001, function() {
