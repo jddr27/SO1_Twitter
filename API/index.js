@@ -156,7 +156,7 @@ app.get('/api/delete-tweets', (req, res) => {
 app.use(express.static(path.join(__dirname, 'public')));
 //app.listen(PORT, () => console.log(`Express server startd on port ${PORT}`));
 
-io.on('connection', function(socket) {
+/*io.on('connection', function(socket) {
     console.log('Alguien se ha conectado con Sockets');
   
     socket.on('disconnect', function () {
@@ -168,7 +168,7 @@ io.on('connection', function(socket) {
   
       io.sockets.emit('messages', messages);
     });
-  });
+  });*/
   
 
 var chat = io
@@ -188,6 +188,8 @@ var chat = io
 var news = io
   .of('/news')
   .on('connection', function (socket) {
+    console.log('Alguien se ha conectado con Sockets del news');
+
     socket.emit('item', { news: 'item' });
   });
 
