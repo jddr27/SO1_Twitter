@@ -26,7 +26,8 @@ const COLLECTION_NAME = 'tweets';
 
 
 app.get('/', (req, res) => {
-    res.render('index',{});
+    //res.render('index',{});
+    res.sendfile('index.html');
 });
 
 
@@ -36,7 +37,8 @@ app.get('/cates', (req, res) => {
 
 
 app.get('/usus', (req, res) => {
-    res.render('usus',{});
+    //res.render('usus',{});
+    res.sendfile('usus.html');
 });
 
 
