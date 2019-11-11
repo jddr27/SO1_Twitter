@@ -7,6 +7,8 @@ const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -18,18 +20,14 @@ app.use(express.urlencoded({extended: false}));
 app.disable('etag');
 
 const IP = process.env.DB || "localhost";
-// Connection URL
 const url = `mongodb://admin:admin@${IP}:27017`;
- 
-// Database Name
-const DB_NAME = 'sopes1proyecto';
-
-const COLLECITON_NAME = 'tweets';
+ const DB_NAME = 'sopes1proyecto';
+const COLLECTION_NAME = 'tweets';
 
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.redirect('/tweets')
-});
+});*/
 
 
 app.get('/tweets', (req, res) => {
@@ -38,7 +36,7 @@ app.get('/tweets', (req, res) => {
         if (err) throw err;
     
         const db = client.db(DB_NAME);
-        const collection = db.collection(COLLECITON_NAME);
+        const collection = db.collection(COLLECTION_NAME);
 
         let q = req.query.q;
 
@@ -62,7 +60,6 @@ app.get('/tweets', (req, res) => {
 });
 
 
-
 app.get('/api/tweets', (req, res) => {
 
     MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
@@ -71,7 +68,7 @@ app.get('/api/tweets', (req, res) => {
         console.log("Connected successfully to server");
     
         const db = client.db(DB_NAME);
-        const collection = db.collection(COLLECITON_NAME);
+        const collection = db.collection(COLLECTION_NAME);
         collection.find({}).toArray(function(err, result){
             res.json(result);
         });
@@ -147,7 +144,23 @@ app.get('/api/delete-tweets', (req, res) => {
 
 // static folder
 app.use(express.static(path.join(__dirname, 'public')));
+//app.listen(PORT, () => console.log(`Express server startd on port ${PORT}`));
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => console.log(`Express server startd on port ${PORT}`));
+io.on('connection', function(socket) {
+    console.log('Alguien se ha conectado con Sockets');
+    socket.emit('messages', messages);
+  
+    socket.on('disconnect', function () {
+        console.log('user disconnected');
+    });
+  
+    socket.on('new-message', function(data) {
+      messages.push(data);
+  
+      io.sockets.emit('messages', messages);
+    });
+  });
+  
+  server.listen(3001, function() {
+    console.log("Servidor corriendo en el 3001");
+  });
