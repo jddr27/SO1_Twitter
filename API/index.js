@@ -148,7 +148,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 io.on('connection', function(socket) {
     console.log('Alguien se ha conectado con Sockets');
-    socket.emit('messages', messages);
   
     socket.on('disconnect', function () {
         console.log('user disconnected');

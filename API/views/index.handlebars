@@ -105,19 +105,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="card mb-4">
-                            <div class="card-body flexbox-b">
-                                <div class="easypie mr-4" data-percent="0" data-bar-color="#ff4081" data-size="80" data-line-width="8">
-                                    <span class="easypie-data font-26 text-pink"><i class="la la-photo"></i></span>
-                                </div>
-                                <div>
-                                    <h3 class="font-strong text-pink">{{totalImagenes}}</h3>
-                                    <div class="text-muted">Total de Imágenes</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 
                 <div class="row">
@@ -125,13 +112,26 @@
                         <div class="ibox ibox-fullheight">
                             <div class="ibox-head">
                                 <div>
-                                    <div class="ibox-title">Porcentaje de consumo</div><small class="text-lighter">Memoria RAM</small></div>
+                                    <div class="ibox-title">Ultimos Tweets</div><small class="text-lighter">Top 10</small></div>
                             </div>
                             <div class="ibox-body">
-                                <div class="mt-5 mb-5">
-                                    
-                                    <canvas id="earnings_chart"  class="chartjs-render-monitor"></canvas>
-                                </div>
+                                <ul class="list-group list-group-full list-group-divider">
+                                    {{#each tweets}}
+                                    <li class="list-group-item py-3">
+                                        <a class="media-img" href="javascript:;">
+                                            <img class="img-circle" src="img/users/u10.jpg" alt="image" width="54">
+                                            {{this.nombre}}
+                                        </a>
+                                        
+                                        <p class="text-light">{{this.txt}}</p>
+                                        <div class="text-muted font-13">
+                                            <span class="badge badge-primary">{{this.categoria}}</span>
+                                            <span class="mx-2">•</span>
+                                            <span>{{this.usr}}</span>
+                                        </div>
+                                    </li>
+                                    {{/each}}
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -174,6 +174,36 @@
                                     <div class="text-center">
                                          <h2 class="text-pink m-0">{{categoriaMaxTotal}}</h2>
                                         <div class="text-muted">TWEETS</div>
+                                    </div>
+                                    <div class="text-center">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-air text-center centered mb-4" style="max-width:320px;">
+                            <div class="card-body">
+                                <h4>Buscadores</h4>
+                                
+                                &nbsp;
+                                <div class="d-flex align-items-center justify-content-between mb-5">
+                                    <div class="text-center">
+                                        &nbsp;
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="input-group-icon input-group-icon-left input-group-lg mb-4">
+                                            <span class="input-icon input-icon-right"><i class="ti-search"></i></span>
+                                            <input id="search" class="form-control form-control-air font-light font-poppins border-0" type="text" placeholder="Buscar usuario ..." style="box-shadow:0 3px 6px rgba(10,16,20,.15);">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        &nbsp;
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="input-group-icon input-group-icon-left input-group-lg mb-4">
+                                            <span class="input-icon input-icon-right"><i class="ti-search"></i></span>
+                                            <input id="search" class="form-control form-control-air font-light font-poppins border-0" type="text" placeholder="Buscar categoria ..." style="box-shadow:0 3px 6px rgba(10,16,20,.15);">
+                                        </div>
                                     </div>
                                     <div class="text-center">
                                         &nbsp;
