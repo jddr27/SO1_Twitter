@@ -19,6 +19,10 @@ io.on('connection', function(socket) {
   console.log('Alguien se ha conectado con Sockets');
   socket.emit('messages', messages);
 
+  socket.on('disconnect', function () {
+      console.log('user disconnected');
+  });
+
   socket.on('new-message', function(data) {
     messages.push(data);
 
