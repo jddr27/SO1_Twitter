@@ -21,7 +21,7 @@ app.disable('etag');
 
 const IP = process.env.DB || "localhost";
 const url = `mongodb://admin:admin@${IP}:27017`;
- const DB_NAME = 'sopes1proyecto';
+const DB_NAME = 'sopes1proyecto';
 const COLLECTION_NAME = 'tweets';
 
 
