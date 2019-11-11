@@ -30,6 +30,16 @@ app.get('/', (req, res) => {
 });
 
 
+app.get('/cates', (req, res) => {
+    res.render('cates',{});
+});
+
+
+app.get('/usus', (req, res) => {
+    res.render('usus',{});
+});
+
+
 app.get('/tweets', (req, res) => {
     MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
             
@@ -160,6 +170,27 @@ io.on('connection', function(socket) {
     });
   });
   
+
+var chat = io
+  .of('/chat')
+  .on('connection', function (socket) {
+    console.log('Alguien se ha conectado con Sockets del chat');
+    socket.emit('a message', {
+        that: 'only'
+      , '/chat': 'will get'
+    });
+    chat.emit('a message', {
+        everyone: 'in'
+      , '/chat': 'will get'
+    });
+  });
+
+var news = io
+  .of('/news')
+  .on('connection', function (socket) {
+    socket.emit('item', { news: 'item' });
+  });
+
   server.listen(3001, function() {
     console.log("Servidor corriendo en el 3001");
-  });
+});

@@ -7,7 +7,7 @@ const url = `mongodb://admin:admin@${IP}:27017`;
 // Database Name
 const DB_NAME = 'sopes1proyecto';
 
-const COLLECITON_NAME = 'tweets';
+const COLLECTION_NAME = 'tweets';
  
 
 const MONGODB = {
@@ -19,7 +19,7 @@ const MONGODB = {
             console.log("Connected successfully to server");
         
             const db = client.db(DB_NAME);
-            const collection = db.collection(COLLECITON_NAME);
+            const collection = db.collection(COLLECTION_NAME);
             collection.insertOne(document, function(err, result) {
 
                 if (err) throw err;
@@ -36,33 +36,10 @@ const MONGODB = {
             console.log("Connected successfully to server");
         
             const db = client.db(DB_NAME);
-            const collection = db.collection(COLLECITON_NAME);
+            const collection = db.collection(COLLECTION_NAME);
             collection.remove({});
         });
     }
-
-
-
-/*
-    insert: function(db, callback) {
-        // Get the documents collection
-        const collection = db.collection('tweets');
-        // Insert some documents
-        collection.insertOne({
-            content:"this is a tweet #test"
-        }, function(err, result) {
-
-            if (err) {
-                console.error(err);
-                return;
-            }
-
-            console.log("tweet guardado en database;");
-            callback(result);
-            
-        });
-
-    }*/
 }
 
 

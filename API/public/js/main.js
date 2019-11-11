@@ -1,4 +1,4 @@
-var socket = io.connect('http://130.211.112.112:3001', { 'forceNew': true });
+/*var socket = io.connect('http://130.211.112.112:3001', { 'forceNew': true });
 
 socket.on('messages', function(data) {
   console.log(data);
@@ -25,3 +25,13 @@ function addMessage(e) {
   socket.emit('new-message', message);
   return false;
 }
+*/
+var news = io.connect('http://130.211.112.112:3001/news');
+  
+  chat.on('connect', function () {
+    /*chat.emit('hi!');*/
+  });
+  
+  news.on('news', function () {
+    news.emit('woot');
+  });
