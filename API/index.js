@@ -25,9 +25,9 @@ const DB_NAME = 'sopes1proyecto';
 const COLLECTION_NAME = 'tweets';
 
 
-/*app.get('/', (req, res) => {
-    res.redirect('/tweets')
-});*/
+app.get('/', (req, res) => {
+    res.render('index',{});
+});
 
 
 app.get('/tweets', (req, res) => {
