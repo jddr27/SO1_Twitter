@@ -31,7 +31,3 @@ var news = io.connect('http://130.211.112.112:3001/news');
   news.on('connect', function () {
     /*chat.emit('hi!');*/
   });
-  
-  news.on('news', function () {
-    news.emit('woot');
-  });
