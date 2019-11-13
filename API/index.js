@@ -26,8 +26,8 @@ const COLLECTION_NAME = 'tweets';
 
 
 app.get('/', (req, res) => {
-    //res.render('index',{});
-    res.sendfile('index.html');
+    res.render('index',{});
+    //res.sendfile('index.html');
 });
 
 
@@ -178,9 +178,9 @@ const ioIndex = io
     console.log('Alguien se ha conectado con Sockets del Index');
     ioIndex.emit('hi', 'Hello from Index');
     
-    ioIndex.on('disconnect', function () {
+    /*ioIndex.on('disconnect', function () {
         console.log('user disconnected from Index');
-    });
+    });*/
 });
 
 
