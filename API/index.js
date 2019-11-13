@@ -156,7 +156,6 @@ app.get('/api/delete-tweets', (req, res) => {
 
 // static folder
 app.use(express.static(path.join(__dirname, 'public')));
-//app.listen(PORT, () => console.log(`Express server startd on port ${PORT}`));
 
 /*io.on('connection', function(socket) {
     console.log('Alguien se ha conectado con Sockets');
@@ -173,20 +172,53 @@ app.use(express.static(path.join(__dirname, 'public')));
   });*/
   
 
-const chat = io
-  .of('/chat')
+const ioIndex = io
+  .of('/ioIndex')
   .on('connection', function (socket) {
-    console.log('Alguien se ha conectado con Sockets del chat');
-    chat.emit('hi', 'Hello from Chat');
-  });
+    console.log('Alguien se ha conectado con Sockets del Index');
+    ioIndex.emit('hi', 'Hello from Index');
+    
+    ioIndex.on('disconnect', function () {
+        console.log('user disconnected from Index');
+    });
+});
 
-const news = io
-  .of('/news')
+
+const ioUsus = io
+  .of('/ioUsus')
   .on('connection', function (socket) {
-    console.log('Alguien se ha conectado con Sockets del news');
-    news.emit('hi', 'Hello from News');
-  });
+    console.log('Alguien se ha conectado con Sockets del Usus');
+    ioUsus.emit('hi', 'Hello from Usus');
 
-  server.listen(3001, function() {
+    ioUsus.on('disconnect', function () {
+        console.log('user disconnected from Usus');
+    });
+});
+
+
+const ioCates = io
+  .of('/ioCates')
+  .on('connection', function (socket) {
+    console.log('Alguien se ha conectado con Sockets del Cates');
+    ioCates.emit('hi', 'Hello from Cates');
+
+    ioCates.on('disconnect', function () {
+        console.log('user disconnected from Cates');
+    });
+});
+
+
+const ioTweets = io
+  .of('/ioTweets')
+  .on('connection', function (socket) {
+    console.log('Alguien se ha conectado con Sockets del Tweets');
+    ioTweets.emit('hi', 'Hello from Tweets');
+
+    ioTweets.on('disconnect', function () {
+        console.log('user disconnected from Tweets');
+    });
+});
+
+server.listen(3001, function() {
     console.log("Servidor corriendo en el 3001");
 });

@@ -26,10 +26,9 @@ function addMessage(e) {
   return false;
 }
 */
-var chat = io.connect('http://130.211.112.112:3001/chat', { 'forceNew': true });
+var ioIndex = io.connect('http://130.211.112.112:3001/ioIndex', { 'forceNew': true });
   
-  chat.on('hi', function (data) {
-    /*chat.emit('hi!');*/
-    document.body.innerHTML = '';
-    document.write(data);
-  });
+ioIndex.on('hi', function (data) {
+    var html = `<h1>${data}</h1>`;
+    document.getElementById('bienvenida').innerHTML = html;
+});
