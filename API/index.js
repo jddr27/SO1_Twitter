@@ -64,6 +64,19 @@ var structCate = {
 
 
 app.get('/', (req, res) => {
+    var options = {
+        url     : `http://${IP2}:3001/tweets`,
+        method  : 'GET',
+        jar     : true,
+        headers : headers
+    }
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            let r = JSON.parse(body);
+            structTweets=r.tweets;
+            structInfo['totalTweets'] = r.total;
+        }
+    });
     res.render('index',{});
 });
 
