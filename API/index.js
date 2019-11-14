@@ -82,14 +82,14 @@ app.get('/usus', (req, res) => {
 
 app.get('/buscarUsu', (req, res) => {
     q = req.query.txtUsu;
-    send = q != undefined ? q : "";
+    send = q;
     res.redirect('/usus');
 });
 
 
 app.get('/buscarCate', (req, res) => {
     q = req.query.txtCate;
-    send = q != undefined ? q : "";
+    send = q;;
     send = send.replace('#', '%23');
     res.redirect('/cates');
 });
