@@ -32,3 +32,28 @@ ioIndex.on('hi', function (data) {
     var html = `<h1>${data}</h1>`;
     document.getElementById('bienvenida').innerHTML = html;
 });
+
+ioIndex.on('tweets10', function(data) {
+  console.log(data);
+  render(data);
+})
+
+function render (data) {
+  var html = data.map(function(elem, index) {
+    return(`<li class="list-group-item py-3">
+                <a class="media-img" href="javascript:;">
+                    <img class="img-circle" src="img/users/u10.jpg" alt="image" width="54">
+                    ${elem.nombre}
+                </a>
+                
+                <p class="text-light">${elem.txt}</p>
+                <div class="text-muted font-13">
+                    <span class="badge badge-primary">${this.categoria}</span>
+                    <span class="mx-2">•</span>
+                    <span>${this.usr}</span>
+                </div>
+            </li>`);
+  }).join(" ");
+
+  document.getElementById('cosoTweets').innerHTML = html;
+}

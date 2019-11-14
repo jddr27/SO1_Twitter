@@ -65,7 +65,7 @@
         <div class="content-wrapper">
             <!-- START PAGE CONTENT-->
             <div id="bienvenida"></div>
-            
+
             <div class="page-content fade-in-up">
                 <div class="row mb-4">
                     <div class="col-lg-3 col-md-6">
@@ -117,22 +117,8 @@
                                     <div class="ibox-title">Ultimos Tweets</div><small class="text-lighter">Top 10</small></div>
                             </div>
                             <div class="ibox-body">
-                                <ul class="list-group list-group-full list-group-divider">
-                                    {{#each tweets}}
-                                    <li class="list-group-item py-3">
-                                        <a class="media-img" href="javascript:;">
-                                            <img class="img-circle" src="img/users/u10.jpg" alt="image" width="54">
-                                            {{this.nombre}}
-                                        </a>
-                                        
-                                        <p class="text-light">{{this.txt}}</p>
-                                        <div class="text-muted font-13">
-                                            <span class="badge badge-primary">{{this.categoria}}</span>
-                                            <span class="mx-2">•</span>
-                                            <span>{{this.usr}}</span>
-                                        </div>
-                                    </li>
-                                    {{/each}}
+                                <ul id="cosoTweets" class="list-group list-group-full list-group-divider">
+                                    
                                 </ul>
                             </div>
                         </div>

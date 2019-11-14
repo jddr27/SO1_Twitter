@@ -25,9 +25,16 @@ const DB_NAME = 'sopes1proyecto';
 const COLLECTION_NAME = 'tweets';
 
 
+var structTweets = [{
+    alias_usuario: "@chino",
+    nombre: "daniel",
+    txt: "Hola mundo!!!!! #saludo",
+    categoria: "saludo"
+}];
+
+
 app.get('/', (req, res) => {
     res.render('index',{});
-    //res.sendfile('index.html');
 });
 
 
@@ -169,6 +176,12 @@ app.use(express.static(path.join(__dirname, 'public')));
   
       io.sockets.emit('messages', messages);
     });
+
+
+    setInterval(() => {
+        io.emit('message', variable);
+    }, 100);
+
   });*/
   
 
@@ -189,6 +202,7 @@ const ioUsus = io
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Usus');
     ioUsus.emit('hi', 'Hello from Usus');
+    ioUsus.emit('tweets10', structTweets);
 
     ioUsus.on('disconnect', function () {
         console.log('user disconnected from Usus');
