@@ -6,28 +6,13 @@ services:
     depends_on:
       - database    
     ports:
-      - "3000:3000"   
+      - "3001:3001"   
     environment:
       API: 172.18.0.4
-      FRONT : 172.18.0.5
       DB: 172.18.0.2
     networks:
       redapp:
         ipv4_address: 172.18.0.4 
-  front:
-    container_name: front
-    build: ./FRONT/
-    depends_on:
-      - webserver     
-    ports:
-      - "80:4000"      
-    environment:
-      API: 172.18.0.4
-      FRONT : 172.18.0.5
-      DB: 172.18.0.2
-    networks:
-      redapp:
-        ipv4_address: 172.18.0.5 
   database:
     container_name: database
     image: mongo  
@@ -38,7 +23,6 @@ services:
       
     environment:
       API: 172.18.0.4
-      FRONT : 172.18.0.5
       DB: 172.18.0.2
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
