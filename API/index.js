@@ -64,7 +64,7 @@ var structCate = {
 
 
 app.get('/', (req, res) => {
-    var options = {
+    /*var options = {
         url     : `http://${IP2}:3001/tweets`,
         method  : 'GET',
         jar     : true,
@@ -76,7 +76,7 @@ app.get('/', (req, res) => {
             structTweets=r.tweets;
             structInfo['totalTweets'] = r.total;
         }
-    });
+    });*/
     res.render('index',{});
 });
 
@@ -291,9 +291,26 @@ const ioIndex = io
   .of('/ioIndex')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Index');
-    ioIndex.emit('tweets10', structTweets);
-    ioIndex.emit('infoTotal', structInfo);
-    ioIndex.emit('infoPopu', structPopu);
+    setInterval(() => {
+        var options = {
+            url     : `http://${IP2}:3001/tweets`,
+            method  : 'GET',
+            jar     : true,
+            headers : headers
+        }
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                let r = JSON.parse(body);
+                structTweets=r.tweets;
+                structInfo['totalTweets'] = r.total;
+            }
+        });
+    
+        ioIndex.emit('tweets10', structTweets);
+        ioIndex.emit('infoTotal', structInfo);
+        ioIndex.emit('infoPopu', structPopu);
+    }, 5000);
+    
     
     /*ioIndex.on('disconnect', function () {
         console.log('user disconnected from Index');

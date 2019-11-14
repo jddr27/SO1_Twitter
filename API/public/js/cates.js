@@ -1,6 +1,4 @@
-var ioCates = io.connect('http://130.211.112.112:3001/ioCates', { 'forceNew': true });
-/*const IP = process.env.API || "localhost";
-var ioCates = io.connect(`http://${IP}:3001/ioCates`, { 'forceNew': true });*/
+var ioCates = io.connect('/ioCates', { 'forceNew': true });
 
 ioCates.on('tweets3', function(data) {
   console.log(data);
