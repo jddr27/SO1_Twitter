@@ -30,6 +30,8 @@ const url = `mongodb://admin:admin@${IP}:27017`;
 const DB_NAME = 'sopes1proyecto';
 const COLLECTION_NAME = 'tweets';
 
+var q = "";
+var send = "";
 
 var structTweets = [{
     alias_usuario: "@chino",
@@ -64,19 +66,6 @@ var structCate = {
 
 
 app.get('/', (req, res) => {
-    /*var options = {
-        url     : `http://${IP2}:3001/tweets`,
-        method  : 'GET',
-        jar     : true,
-        headers : headers
-    }
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            let r = JSON.parse(body);
-            structTweets=r.tweets;
-            structInfo['totalTweets'] = r.total;
-        }
-    });*/
     res.render('index',{});
 });
 
@@ -92,47 +81,17 @@ app.get('/usus', (req, res) => {
 
 
 app.get('/buscarUsu', (req, res) => {
-    let q = req.query.txtUsu;
-    let send = q != undefined ? q : ""; 
-    var options = {
-        url     : `http://${IP2}:3001/tweets?q=${send}`,
-        method  : 'GET',
-        jar     : true,
-        headers : headers
-    }
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            let r = JSON.parse(body);
-            structTweets=r.tweets;
-            structUsu['cantiUsu'] = r.total;
-            structUsu['nombre'] = r.tweets[0].nombre;
-            structUsu['alias_usuario'] = send;
-            res.redirect('/usus');
-        }
-    });
+    q = req.query.txtUsu;
+    send = q != undefined ? q : "";
+    res.redirect('/usus');
 });
 
 
 app.get('/buscarCate', (req, res) => {
-    let q = req.query.txtCate;
-    let send = q != undefined ? q : "";
-    console.log(send) 
+    q = req.query.txtCate;
+    send = q != undefined ? q : "";
     send = send.replace('#', '%23');
-    var options = {
-        url     : `http://${IP2}:3001/api/cates?q=${send}`,
-        method  : 'GET',
-        jar     : true,
-        headers : headers
-    }
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            let r = JSON.parse(body);
-            structTweets=r.tweets;
-            structCate['cantiCate'] = r.total;
-            structCate['categoria'] = q;
-            res.redirect('/cates');
-        }
-    });
+    res.redirect('/cates');
 });
 
 
@@ -322,8 +281,25 @@ const ioUsus = io
   .of('/ioUsus')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Usus');
-    ioUsus.emit('tweets3', structTweets);
-    ioUsus.emit('infoUsu', structUsu);
+    setInterval(() => { 
+        var options = {
+            url     : `http://${IP2}:3001/tweets?q=${send}`,
+            method  : 'GET',
+            jar     : true,
+            headers : headers
+        }
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                let r = JSON.parse(body);
+                structTweets=r.tweets;
+                structUsu['cantiUsu'] = r.total;
+                structUsu['nombre'] = r.tweets[0].nombre;
+                structUsu['alias_usuario'] = send;
+            }
+        });
+        ioUsus.emit('tweets3', structTweets);
+        ioUsus.emit('infoUsu', structUsu);
+    }, 5000);
 });
 
 
@@ -331,8 +307,24 @@ const ioCates = io
   .of('/ioCates')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Cates');
-    ioCates.emit('tweets3', structTweets);
-    ioCates.emit('infoCate', structCate);
+    setInterval(() => {
+        var options = {
+            url     : `http://${IP2}:3001/api/cates?q=${send}`,
+            method  : 'GET',
+            jar     : true,
+            headers : headers
+        }
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                let r = JSON.parse(body);
+                structTweets=r.tweets;
+                structCate['cantiCate'] = r.total;
+                structCate['categoria'] = q;
+            }
+        });
+        ioCates.emit('tweets3', structTweets);
+        ioCates.emit('infoCate', structCate);
+    }, 5000);
 });
 
 
