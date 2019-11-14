@@ -1,31 +1,3 @@
-/*var socket = io.connect('http://130.211.112.112:3001', { 'forceNew': true });
-
-socket.on('messages', function(data) {
-  console.log(data);
-  render(data);
-})
-
-function render (data) {
-  var html = data.map(function(elem, index) {
-    return(`<div>
-              <strong>${elem.author}</strong>:
-              <em>${elem.text}</em>
-            </div>`);
-  }).join(" ");
-
-  document.getElementById('messages').innerHTML = html;
-}
-
-function addMessage(e) {
-  var message = {
-    author: document.getElementById('username').value,
-    text: document.getElementById('texto').value
-  };
-
-  socket.emit('new-message', message);
-  return false;
-}
-*/
 var ioIndex = io.connect('http://130.211.112.112:3001/ioIndex', { 'forceNew': true });
 
 ioIndex.on('tweets10', function(data) {
@@ -100,4 +72,58 @@ function renderInfo (data) {
             </div>`;
 
   document.getElementById('cosoInfo').innerHTML = html;
+}
+
+ioIndex.on('infoPopu', function(data) {
+  console.log(data);
+  renderPopu(data);
+})
+
+function renderPopu (data) {
+  var html = `<div class="card card-air text-center centered mb-4" style="max-width:320px;">
+                  <div class="card-body">
+                      <h4>Usuario con más tweets</h4>
+                      <div class="card-avatar mt-3 mb-4">
+                          <img class="img-circle" src="img/users/u10.jpg" alt="image">
+                      </div>
+                      <h4 class="card-title mb-1">${data.popuUsu}</h4>
+                      
+                      &nbsp;
+                      <div class="d-flex align-items-center justify-content-between mb-5">
+                          <div class="text-center">
+                              &nbsp;
+                          </div>
+                          <div class="text-center">
+                              <h2 class="text-pink m-0">${data.cantiUsu}</h2>
+                              <div class="text-muted">TWEETS</div>
+                          </div>
+                          <div class="text-center">
+                              &nbsp;
+                          </div>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="card card-air text-center centered mb-4" style="max-width:320px;">
+                  <div class="card-body">
+                      <h4>Categoria con más tweets</h4>
+                      <h4 class="card-title mb-1">${data.popuCate}</h4>
+                      
+                      &nbsp;
+                      <div class="d-flex align-items-center justify-content-between mb-5">
+                          <div class="text-center">
+                              &nbsp;
+                          </div>
+                          <div class="text-center">
+                              <h2 class="text-pink m-0">${data.cantiCate}</h2>
+                              <div class="text-muted">TWEETS</div>
+                          </div>
+                          <div class="text-center">
+                              &nbsp;
+                          </div>
+                      </div>
+                  </div>
+                </div>`;
+
+  document.getElementById('cosoPopu').innerHTML = html;
 }

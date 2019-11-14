@@ -29,13 +29,20 @@ var structTweets = [{
     alias_usuario: "@chino",
     nombre: "daniel",
     txt: "Hola mundo!!!!! #saludo",
-    categoria: "saludo"
+    categoria: "#saludo"
 }];
 
 var structInfo = {
     totalUsus: 1,
     totalTweets: 2,
     totalCates: 3
+};
+
+var structPopu = {
+    popuUsu: "@chino",
+    cantiUsu: 1,
+    popuCate: "#saludo",
+    cantiCate: 1
 };
 
 app.get('/', (req, res) => {
@@ -196,10 +203,7 @@ const ioIndex = io
     console.log('Alguien se ha conectado con Sockets del Index');
     ioIndex.emit('tweets10', structTweets);
     ioIndex.emit('infoTotal', structInfo);
-    
-    /*ioIndex.on('disconnect', function () {
-        console.log('user disconnected from Index');
-    });*/
+    ioIndex.emit('infoPopu', structPopu);
 });
 
 
@@ -224,20 +228,4 @@ const ioCates = io
     ioCates.on('disconnect', function () {
         console.log('user disconnected from Cates');
     });
-});
-
-
-const ioTweets = io
-  .of('/ioTweets')
-  .on('connection', function (socket) {
-    console.log('Alguien se ha conectado con Sockets del Tweets');
-    ioTweets.emit('hi', 'Hello from Tweets');
-
-    ioTweets.on('disconnect', function () {
-        console.log('user disconnected from Tweets');
-    });
-});
-
-server.listen(3001, function() {
-    console.log("Servidor corriendo en el 3001");
 });
