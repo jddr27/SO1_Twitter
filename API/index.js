@@ -79,7 +79,7 @@ app.get('/usus', (req, res) => {
 
 
 app.get('/buscarUsu', (req, res) => {
-    let q = req.query.q;
+    let q = req.query.txtUsu;
     let send = q != undefined ? q : ""; 
     var options = {
         url     : `http://${IP2}:3001/tweets?q=${send}`,
@@ -101,8 +101,9 @@ app.get('/buscarUsu', (req, res) => {
 
 
 app.get('/buscarCate', (req, res) => {
-    let q = req.query.q;
-    let send = q != undefined ? q : ""; 
+    let q = req.query.txtCate;
+    let send = q != undefined ? q : "";
+    console.log(send) 
     send = send.replace('#', '%23');
     var options = {
         url     : `http://${IP2}:3001/api/cates?q=${send}`,
@@ -115,7 +116,7 @@ app.get('/buscarCate', (req, res) => {
             let r = JSON.parse(body);
             structTweets=r.tweets;
             structCate['cantiCate'] = r.total;
-            structCate['categoria'] = send;
+            structCate['categoria'] = q;
             res.redirect('/cates');
         }
     });
