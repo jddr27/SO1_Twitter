@@ -103,6 +103,7 @@ app.get('/buscarUsu', (req, res) => {
 app.get('/buscarCate', (req, res) => {
     let q = req.query.q;
     let send = q != undefined ? q : ""; 
+    send = send.replace('#', '%23');
     var options = {
         url     : `http://${IP2}:3001/api/cates?q=${send}`,
         method  : 'GET',
