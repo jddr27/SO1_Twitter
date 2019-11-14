@@ -3,6 +3,7 @@ const HashMap = require('hashmap');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+var request = require('request');
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -170,6 +171,28 @@ app.get('/api/delete-tweets', (req, res) => {
         });
     }
 
+});
+
+
+app.get('/usu',(rq,res) => {
+    let q = req.query.q;
+    let send = q != undefined ? q : ""; 
+    var options = {
+        url     : `http://${IP}:3000/tweets?q=${send}`,
+        method  : 'GET',
+        jar     : true,
+        headers : headers
+    }
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            let r = JSON.parse(body);
+            res.render('tweets', {
+              tweets: r.tweets,
+              total: r.total,
+              q: r.q
+            });
+        }
+    });
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
