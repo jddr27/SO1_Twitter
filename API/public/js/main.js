@@ -1,6 +1,6 @@
-//var ioIndex = io.connect('http://130.211.112.112:3001/ioIndex', { 'forceNew': true });
-const IP = process.env.API || "localhost";
-var ioIndex = io.connect(`http://${IP}:3001/ioIndex`, { 'forceNew': true });
+var ioIndex = io.connect('http://130.211.112.112:3001/ioIndex', { 'forceNew': true });
+/*const IP = process.env.API || "localhost";
+var ioIndex = io.connect(`http://${IP}:3001/ioIndex`, { 'forceNew': true });*/
 
 ioIndex.on('tweets10', function(data) {
   console.log(data);

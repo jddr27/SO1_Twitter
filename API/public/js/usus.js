@@ -1,5 +1,6 @@
-const IP = process.env.API || "localhost";
-var ioUsus = io.connect(`http://${IP}:3001/ioUsus`, { 'forceNew': true });
+var ioUsus = io.connect('http://130.211.112.112:3001/ioUsus', { 'forceNew': true });
+/*const IP = process.env.API || "localhost";
+var ioUsus = io.connect(`http://${IP}:3001/ioUsus`, { 'forceNew': true });*/
 
 ioUsus.on('tweets3', function(data) {
   console.log(data);
