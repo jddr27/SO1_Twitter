@@ -20,8 +20,7 @@ app.use(express.urlencoded({extended: false}));
 app.disable('etag');
 
 const IP = process.env.DB || "localhost"; 
-//const url = `mongodb://admin:admin@${IP}:27017`;
-const url = `mongodb://admin:admin@104.154.151.0:27017`;
+const url = `mongodb://admin:admin@${IP}:27017`;
 const DB_NAME = 'sopes1proyecto';
 const COLLECTION_NAME = 'tweets';
 
@@ -57,8 +56,7 @@ app.get('/cates', (req, res) => {
 
 
 app.get('/usus', (req, res) => {
-    //res.render('usus',{});
-    res.sendfile('usus.html');
+    res.render('usus',{});
 });
 
 
@@ -174,25 +172,11 @@ app.get('/api/delete-tweets', (req, res) => {
 
 });
 
-// static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*io.on('connection', function(socket) {
-    console.log('Alguien se ha conectado con Sockets');
-  
-    socket.on('disconnect', function () {
-        console.log('user disconnected');
-    });
-  
-    socket.on('new-message', function(data) {
-      messages.push(data);
-  
-      io.sockets.emit('messages', messages);
-    });
-    setInterval(() => {
-        io.emit('message', variable);
-    }, 100);
-  });*/
+/*setInterval(() => {
+    io.emit('message', variable);
+}, 100);*/
   
 
 const ioIndex = io
@@ -213,11 +197,8 @@ const ioUsus = io
   .of('/ioUsus')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Usus');
-    ioUsus.emit('hi', 'Hello from Usus');
-
-    ioUsus.on('disconnect', function () {
-        console.log('user disconnected from Usus');
-    });
+    ioUsus.emit('tweets3', structTweets);
+    ioUsus.emit('infoUsu', structUsu);
 });
 
 
@@ -225,24 +206,10 @@ const ioCates = io
   .of('/ioCates')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Cates');
-    ioCates.emit('hi', 'Hello from Cates');
-
-    ioCates.on('disconnect', function () {
-        console.log('user disconnected from Cates');
-    });
+    ioCates.emit('tweets3', structTweets);
+    ioCates.emit('infoCate', structCate);
 });
 
-
-const ioTweets = io
-  .of('/ioTweets')
-  .on('connection', function (socket) {
-    console.log('Alguien se ha conectado con Sockets del Tweets');
-    ioTweets.emit('hi', 'Hello from Tweets');
-
-    ioTweets.on('disconnect', function () {
-        console.log('user disconnected from Tweets');
-    });
-});
 
 server.listen(3001, function() {
     console.log("Servidor corriendo en el 3001");
