@@ -68,37 +68,12 @@
                 <div class="page-content fade-in-up">
                     <div class="flexbox-b mb-5">
                         <span class="mr-4 static-badge badge-pink"><i class="ti-search"></i></span>
-                        <div>
-                            <h5 class="font-strong">Tweets</h5>
-                            <div class="text-light">Sistemas Operativos 1 - Proyecto Final</div>
+                        <div id="cosoInfo">
                         </div>
-                    </div>
-                    <div class="input-group-icon input-group-icon-left input-group-lg mb-4">
-                        <span class="input-icon input-icon-right"><i class="ti-search"></i></span>
-                        <input id="search" class="form-control form-control-air font-light font-poppins border-0" type="text" placeholder="Buscar tweet ..." style="box-shadow:0 3px 6px rgba(10,16,20,.15);">
                     </div>
                     <div class="ibox">
                         <div class="ibox-body">
-                            <div class="mb-4">
-                                <h3 class="mt-1">{{total}} resultados para:
-                                    <span class="text-primary">“{{q}}”</span>
-                                </h3></div>
-                            <ul class="list-group list-group-full list-group-divider">
-                                {{#each tweets}}
-                                <li class="list-group-item py-3">
-                                    <a class="media-img" href="javascript:;">
-                                        <img class="img-circle" src="img/users/u10.jpg" alt="image" width="54">
-                                        {{this.nombre}}
-                                    </a>
-                                    
-                                    <p class="text-light">{{this.txt}}</p>
-                                    <div class="text-muted font-13">
-                                        <span class="badge badge-primary">{{this.categoria}}</span>
-                                        <span class="mx-2">•</span>
-                                        <span>{{this.usr}}</span>
-                                    </div>
-                                </li>
-                                {{/each}}
+                            <ul id="cosoTweets" class="list-group list-group-full list-group-divider">
                             </ul>
                         </div>
                     </div>
@@ -107,8 +82,7 @@
             </div>
             <!-- END PAGE CONTENT-->
             <footer class="page-footer">
-                <div class="font-13">2019 <b>Vacaciones Junio</b> - Sistemas Operativos 1, Práctica 1</div>
-
+                <div class="font-13">2019 <b>Segundo Semestre</b> - Sistemas Operativos 1</div>
                 <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
             </footer>
         </div>
@@ -125,7 +99,9 @@
     <script src="vendors/chart.js/dist/Chart.min.js"></script>
     <script src="vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
     <!-- CORE SCRIPTS-->
+    <script src="/socket.io/socket.io.js"></script>
     <script src="js/app.min.js"></script>
+    <script src="js/cates.js"></script>
     <!-- PAGE LEVEL SCRIPTS-->
     <script src="js/scripts/dashboard_visitors.js"></script>
     

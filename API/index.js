@@ -46,6 +46,18 @@ var structPopu = {
     cantiCate: 3
 };
 
+var structUsu = {
+    alias_usuario: "@chino",
+    nombre: "daniel",
+    cantiUsu: 3
+};
+
+var structCate = {
+    categoria: "saludo",
+    cantiCate: 3
+};
+
+
 app.get('/', (req, res) => {
     res.render('index',{});
 });
@@ -107,6 +119,7 @@ app.get('/api/tweets', (req, res) => {
     });
 
 });
+
 
 app.get('/api/tweet', (req, res) => {
 

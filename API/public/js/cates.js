@@ -1,6 +1,7 @@
-var ioIndex = io.connect('http://130.211.112.112:3001/ioIndex', { 'forceNew': true });
+const IP = process.env.API || "localhost";
+var ioCates = io.connect(`http://${IP}:3001/ioCates`, { 'forceNew': true });
 
-ioIndex.on('tweets10', function(data) {
+ioCates.on('tweets3', function(data) {
   console.log(data);
   renderTweets(data);
 })
@@ -23,4 +24,16 @@ function renderTweets (data) {
   }).join(" ");
 
   document.getElementById('cosoTweets').innerHTML = html;
+}
+
+ioCates.on('infoCate', function(data) {
+  console.log(data);
+  renderCate(data);
+})
+
+function renderCate (data) {
+  var html = `<h5 class="font-strong">${data.categoria}</h5>
+              <div class="text-light">${data.cantiCate}</div>`;
+
+  document.getElementById('cosoInfo').innerHTML = html;
 }
