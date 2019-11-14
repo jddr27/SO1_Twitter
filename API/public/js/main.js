@@ -79,7 +79,7 @@ function renderInfo (data) {
                             <span class="easypie-data font-26 text-pink"><i class="la la-users"></i></span>
                         </div>
                         <div>
-                            <h3 class="font-strong text-pink">${totalUsus}</h3>
+                            <h3 class="font-strong text-pink">${data.totalUsus}</h3>
                             <div class="text-muted">Total de Usuarios</div>
                         </div>
                     </div>
@@ -92,12 +92,12 @@ function renderInfo (data) {
                             <span class="easypie-data text-primary" style="font-size:32px;"><i class="la la-tags"></i></span>
                         </div>
                         <div>
-                            <h3 class="font-strong text-primary">${totalCates}</h3>
+                            <h3 class="font-strong text-primary">${data.totalCates}</h3>
                             <div class="text-muted">Total de Categorías</div>
                         </div>
                     </div>
                 </div>
             </div>`;
 
-  document.getElementById('infos').innerHTML = html;
+  document.getElementById('cosoInfo').innerHTML = html;
 }

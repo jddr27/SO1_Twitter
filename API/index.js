@@ -194,7 +194,6 @@ const ioIndex = io
   .of('/ioIndex')
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Index');
-    ioIndex.emit('hi', 'Hello from Index');
     ioIndex.emit('tweets10', structTweets);
     ioIndex.emit('infoTotal', structInfo);
     
