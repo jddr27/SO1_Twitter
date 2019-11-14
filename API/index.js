@@ -90,7 +90,7 @@ app.get('/buscarUsu', (req, res) => {
         if (!error && response.statusCode == 200) {
             let r = JSON.parse(body);
             //structTweets=r.tweets;
-            structUsu.cantiUsu = r.total;
+            structUsu['cantiUsu'] = r.total;
             res.redirect('/usus');
         }
     });
