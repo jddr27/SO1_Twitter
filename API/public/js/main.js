@@ -48,9 +48,9 @@ function render (data) {
                 
                 <p class="text-light">${elem.txt}</p>
                 <div class="text-muted font-13">
-                    <span class="badge badge-primary">${this.categoria}</span>
+                    <span class="badge badge-primary">${elem.categoria}</span>
                     <span class="mx-2">•</span>
-                    <span>${this.usr}</span>
+                    <span>${elem.alias_usuario}</span>
                 </div>
             </li>`);
   }).join(" ");

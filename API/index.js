@@ -190,6 +190,7 @@ const ioIndex = io
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Index');
     ioIndex.emit('hi', 'Hello from Index');
+    ioIndex.emit('tweets10', structTweets);
     
     /*ioIndex.on('disconnect', function () {
         console.log('user disconnected from Index');
@@ -202,7 +203,6 @@ const ioUsus = io
   .on('connection', function (socket) {
     console.log('Alguien se ha conectado con Sockets del Usus');
     ioUsus.emit('hi', 'Hello from Usus');
-    ioUsus.emit('tweets10', structTweets);
 
     ioUsus.on('disconnect', function () {
         console.log('user disconnected from Usus');
