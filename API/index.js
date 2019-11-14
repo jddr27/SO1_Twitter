@@ -33,9 +33,9 @@ var structTweets = [{
 }];
 
 var structInfo = {
-    totalUsus = 1,
-    totalTweets = 2,
-    totalCates = 3
+    totalUsus: 1,
+    totalTweets: 2,
+    totalCates: 3
 };
 
 app.get('/', (req, res) => {
