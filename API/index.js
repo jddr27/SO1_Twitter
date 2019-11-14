@@ -93,8 +93,29 @@ app.get('/buscarUsu', (req, res) => {
             structTweets=r.tweets;
             structUsu['cantiUsu'] = r.total;
             structUsu['nombre'] = r.tweets[0].nombre;
-            structUsu['alias_usuario'] = q;
+            structUsu['alias_usuario'] = send;
             res.redirect('/usus');
+        }
+    });
+});
+
+
+app.get('/buscarCate', (req, res) => {
+    let q = req.query.q;
+    let send = q != undefined ? q : ""; 
+    var options = {
+        url     : `http://${IP2}:3001/api/cates?q=${send}`,
+        method  : 'GET',
+        jar     : true,
+        headers : headers
+    }
+    request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            let r = JSON.parse(body);
+            structTweets=r.tweets;
+            structCate['cantiCate'] = r.total;
+            structCate['categoria'] = send;
+            res.redirect('/cates');
         }
     });
 });
@@ -115,6 +136,36 @@ app.get('/tweets', (req, res) => {
             q = q.replace('%23', '#');
             query = {
                 alias_usuario: new RegExp(q)
+            }
+        }
+
+        collection.find(query).toArray(function(err, result){
+            res.json({
+                tweets: result,
+                total: result.length,
+                q: q
+            });
+        });
+        
+    });
+});
+
+
+app.get('/api/cates', (req, res) => {
+    MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
+            
+        if (err) throw err;
+    
+        const db = client.db(DB_NAME);
+        const collection = db.collection(COLLECTION_NAME);
+
+        let q = req.query.q;
+
+        let query = {};
+        if (q) {
+            q = q.replace('%23', '#');
+            query = {
+                categoria: new RegExp(q)
             }
         }
 
