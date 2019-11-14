@@ -20,8 +20,7 @@ app.use(express.urlencoded({extended: false}));
 app.disable('etag');
 
 const IP = process.env.DB || "localhost";
-//const url = `mongodb://admin:admin@${IP}:27017`;
-const url = `mongodb://admin:admin@104.154.151.0:27017`;
+const url = `mongodb://admin:admin@${IP}:27017`;
 const DB_NAME = 'sopes1proyecto';
 const COLLECTION_NAME = 'tweets';
 
@@ -30,7 +29,7 @@ var structTweets = [{
     alias_usuario: "@chino",
     nombre: "daniel",
     txt: "Hola mundo!!!!! #saludo",
-    categoria: "#saludo"
+    categoria: "saludo"
 }];
 
 var structInfo = {
@@ -38,13 +37,6 @@ var structInfo = {
     totalTweets: 2,
     totalCates: 3
 };
-
-/*var structPopu = {
-    popuUsu: "@chino",
-    cantiUsu: 1,
-    popuCate: "#saludo",
-    cantiCate: 1
-};*/
 
 app.get('/', (req, res) => {
     res.render('index',{});
@@ -189,12 +181,9 @@ app.use(express.static(path.join(__dirname, 'public')));
   
       io.sockets.emit('messages', messages);
     });
-
-
     setInterval(() => {
         io.emit('message', variable);
     }, 100);
-
   });*/
   
 
@@ -204,7 +193,10 @@ const ioIndex = io
     console.log('Alguien se ha conectado con Sockets del Index');
     ioIndex.emit('tweets10', structTweets);
     ioIndex.emit('infoTotal', structInfo);
-    //ioIndex.emit('infoPopu', structPopu);
+    
+    /*ioIndex.on('disconnect', function () {
+        console.log('user disconnected from Index');
+    });*/
 });
 
 
@@ -229,4 +221,20 @@ const ioCates = io
     ioCates.on('disconnect', function () {
         console.log('user disconnected from Cates');
     });
+});
+
+
+const ioTweets = io
+  .of('/ioTweets')
+  .on('connection', function (socket) {
+    console.log('Alguien se ha conectado con Sockets del Tweets');
+    ioTweets.emit('hi', 'Hello from Tweets');
+
+    ioTweets.on('disconnect', function () {
+        console.log('user disconnected from Tweets');
+    });
+});
+
+server.listen(3001, function() {
+    console.log("Servidor corriendo en el 3001");
 });
