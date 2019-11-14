@@ -32,6 +32,11 @@ var structTweets = [{
     categoria: "saludo"
 }];
 
+var structInfo = {
+    totalUsus = 1,
+    totalTweets = 2,
+    totalCates = 3
+};
 
 app.get('/', (req, res) => {
     res.render('index',{});
@@ -191,6 +196,7 @@ const ioIndex = io
     console.log('Alguien se ha conectado con Sockets del Index');
     ioIndex.emit('hi', 'Hello from Index');
     ioIndex.emit('tweets10', structTweets);
+    ioIndex.emit('infoTotal', structInfo);
     
     /*ioIndex.on('disconnect', function () {
         console.log('user disconnected from Index');

@@ -27,18 +27,13 @@ function addMessage(e) {
 }
 */
 var ioIndex = io.connect('http://130.211.112.112:3001/ioIndex', { 'forceNew': true });
-  
-ioIndex.on('hi', function (data) {
-    var html = `<h1>${data}</h1>`;
-    document.getElementById('bienvenida').innerHTML = html;
-});
 
 ioIndex.on('tweets10', function(data) {
   console.log(data);
-  render(data);
+  renderTweets(data);
 })
 
-function render (data) {
+function renderTweets (data) {
   var html = data.map(function(elem, index) {
     return(`<li class="list-group-item py-3">
                 <a class="media-img" href="javascript:;">
@@ -56,4 +51,53 @@ function render (data) {
   }).join(" ");
 
   document.getElementById('cosoTweets').innerHTML = html;
+}
+
+ioIndex.on('infoTotal', function(data) {
+  console.log(data);
+  renderInfo(data);
+})
+
+function renderInfo (data) {
+  var html = `<div class="col-lg-3 col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body flexbox-b">
+                        <div class="easypie mr-4" data-percent="100" data-bar-color="#5c6bc0" data-size="80" data-line-width="8">
+                            <span class="easypie-data text-primary" style="font-size:32px;"><i class="la la-twitter-square"></i></span>
+                        </div>
+                        <div>
+                            <h3 class="font-strong text-primary">${data.totalTweets}</h3>
+                            <div class="text-muted">Total de Tweets</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body flexbox-b">
+                        <div class="easypie mr-4" data-percent="100" data-bar-color="#ff4081" data-size="80" data-line-width="8">
+                            <span class="easypie-data font-26 text-pink"><i class="la la-users"></i></span>
+                        </div>
+                        <div>
+                            <h3 class="font-strong text-pink">${totalUsus}</h3>
+                            <div class="text-muted">Total de Usuarios</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body flexbox-b">
+                        <div class="easypie mr-4" data-percent="100" data-bar-color="#5c6bc0" data-size="80" data-line-width="8">
+                            <span class="easypie-data text-primary" style="font-size:32px;"><i class="la la-tags"></i></span>
+                        </div>
+                        <div>
+                            <h3 class="font-strong text-primary">${totalCates}</h3>
+                            <div class="text-muted">Total de Categorías</div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+  document.getElementById('infos').innerHTML = html;
 }
