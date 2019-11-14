@@ -74,7 +74,7 @@ function renderInfo (data) {
   document.getElementById('cosoInfo').innerHTML = html;
 }
 
-ioIndex.on('infoPopu', function(data) {
+/*ioIndex.on('infoPopu', function(data) {
   console.log(data);
   renderPopu(data);
 })
@@ -126,4 +126,4 @@ function renderPopu (data) {
                 </div>`;
 
   document.getElementById('cosoPopu').innerHTML = html;
-}
+}*/

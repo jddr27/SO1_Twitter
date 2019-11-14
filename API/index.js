@@ -20,7 +20,8 @@ app.use(express.urlencoded({extended: false}));
 app.disable('etag');
 
 const IP = process.env.DB || "localhost";
-const url = `mongodb://admin:admin@${IP}:27017`;
+//const url = `mongodb://admin:admin@${IP}:27017`;
+const url = `mongodb://admin:admin@104.154.151.0:27017`;
 const DB_NAME = 'sopes1proyecto';
 const COLLECTION_NAME = 'tweets';
 
@@ -38,12 +39,12 @@ var structInfo = {
     totalCates: 3
 };
 
-var structPopu = {
+/*var structPopu = {
     popuUsu: "@chino",
     cantiUsu: 1,
     popuCate: "#saludo",
     cantiCate: 1
-};
+};*/
 
 app.get('/', (req, res) => {
     res.render('index',{});
@@ -203,7 +204,7 @@ const ioIndex = io
     console.log('Alguien se ha conectado con Sockets del Index');
     ioIndex.emit('tweets10', structTweets);
     ioIndex.emit('infoTotal', structInfo);
-    ioIndex.emit('infoPopu', structPopu);
+    //ioIndex.emit('infoPopu', structPopu);
 });
 
 
