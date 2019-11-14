@@ -25,6 +25,7 @@ app.use(express.urlencoded({extended: false}));
 app.disable('etag');
 
 const IP = process.env.DB || "localhost"; 
+const IP2 = process.env.API || "localhost"; 
 const url = `mongodb://admin:admin@${IP}:27017`;
 const DB_NAME = 'sopes1proyecto';
 const COLLECTION_NAME = 'tweets';
@@ -81,7 +82,7 @@ app.get('/buscarUsu', (req, res) => {
     let q = req.query.q;
     let send = q != undefined ? q : ""; 
     var options = {
-        url     : `http://${IP}:3000/tweets?q=${send}`,
+        url     : `http://${IP2}:3001/tweets?q=${send}`,
         method  : 'GET',
         jar     : true,
         headers : headers
@@ -90,7 +91,7 @@ app.get('/buscarUsu', (req, res) => {
         if (!error && response.statusCode == 200) {
             let r = JSON.parse(body);
             //structTweets=r.tweets;
-            //structUsu['cantiUsu'] = r.total;
+            structUsu['cantiUsu'] = r.total;
             res.redirect('/usus');
         }
     });
