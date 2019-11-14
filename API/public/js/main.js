@@ -96,3 +96,34 @@ function renderInfo (data) {
 
   document.getElementById('cosoInfo').innerHTML = html;
 }
+
+ioIndex.on('infoPopu', function(data) {
+  console.log(data);
+  renderPopu(data);
+})
+
+function renderPopu (data) {
+  var html = `<div class="card-body">
+                <h4>Usuario con más tweets</h4>
+                <h4 class="card-title mb-1">${data.popuUsu}</h4>
+                &nbsp;
+                <div class="d-flex align-items-center justify-content-between mb-5">
+                    <div class="text-center">
+                        <h2 class="text-pink m-0">${data.cantiUsu}</h2>
+                        <div class="text-muted">TWEETS</div>
+                    </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <h4>Categoria con más tweets</h4>
+                <h4 class="card-title mb-1">${data.popuCate}</h4>
+                <div class="d-flex align-items-center justify-content-between mb-5">
+                    <div class="text-center">
+                        <h2 class="text-pink m-0">${data.cantiCate}</h2>
+                        <div class="text-muted">TWEETS</div>
+                    </div>
+                </div>
+              </div>`;
+
+  document.getElementById('cosoPopu').innerHTML = html;
+}
